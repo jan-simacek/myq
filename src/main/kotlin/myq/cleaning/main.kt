@@ -1,8 +1,10 @@
 import kotlinx.serialization.ExperimentalSerializationApi
 import myq.cleaning.parser.Serializer
+import myq.cleaning.robot.ProgramExecutionResult
 import java.io.File
 import java.io.IOException
 import java.lang.IllegalArgumentException
+import kotlin.system.exitProcess
 
 /**
  * Verifies if a writeable file can be open or created in 'path'. The complication stems from the fact, that there
@@ -53,6 +55,8 @@ fun main(args: Array<String>) {
 
     val serializer = Serializer()
     val robot = serializer.buildRobot(args[0])
-    robot.run()
+    val result = robot.run()
     serializer.writeResults(args[1], robot.roomMap, robot.state)
+
+    exitProcess(result.ordinal) // propagate error code to system
 }
