@@ -51,7 +51,7 @@ class MyQRobotE2ETest {
         val inputFile = getResourcesFilePath("valid_input.json")
         val outputFile = createTempFile()
 
-        main(arrayOf(inputFile, outputFile.absolutePathString()))
+        main(arrayOf(inputFile, outputFile.absolutePathString(), "--test"))
 
         val expectedOutput = File(getResourcesFilePath("valid_e2e_output.json")).readText()
         assertEquals(expectedOutput, outputFile.readText())

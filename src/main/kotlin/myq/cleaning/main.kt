@@ -33,7 +33,7 @@ internal fun validateArgs(args: Array<String>) {
         println("Usage: main <input_file_path> <output_file_path>")
     }
 
-    if (args.size != 2) {
+    if (args.size < 2 || args.size > 3) { // 3rd argument only for testing - otherwise it cannot be e2e tested
         printUsage()
         throw IllegalArgumentException("2 arguments expected")
     }
@@ -58,5 +58,7 @@ fun main(args: Array<String>) {
     val result = robot.run()
     serializer.writeResults(args[1], robot.roomMap, robot.state)
 
-    exitProcess(result.ordinal) // propagate error code to system
+    if (args.size != 3 || args[2] != "--test") { // if last argument is --test don't exit the process or else JUnit ignores the test
+        exitProcess(result.ordinal) // propagate error code to system
+    }
 }
