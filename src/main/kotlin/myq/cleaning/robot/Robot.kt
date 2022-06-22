@@ -7,10 +7,6 @@ import myq.cleaning.model.Position
 import myq.cleaning.model.RobotState
 import java.util.*
 
-enum class CommandExecutionResult {
-    OK, BATTERY_DEAD, POSITION_INVALID
-}
-
 enum class ProgramExecutionResult {
     OK, STUCK, BATTERY_DEAD
 }
@@ -31,6 +27,10 @@ class Robot(inputMap: List<List<CellType>>, private val inputCommands: Iterable<
             arrayOf(Command.TR, Command.B, Command.TR, Command.A),
             arrayOf(Command.TL, Command.TL, Command.A),
         )
+
+        private enum class CommandExecutionResult {
+            OK, BATTERY_DEAD, POSITION_INVALID
+        }
     }
     private val backoffQueue: Queue<Command> = LinkedList()
     private val logger = KotlinLogging.logger {}
