@@ -33,3 +33,7 @@ tasks.withType<KotlinCompile>() {
 application {
     mainClassName = "MainKt"
 }
+val compileKotlin: KotlinCompile by tasks
+compileKotlin.kotlinOptions {
+    jvmTarget = "1.8"
+}
