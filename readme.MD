@@ -23,3 +23,9 @@ unpack it into a folder and within it run
 bin/myqtest
 ```
 It'll guide what parameters to supply.
+
+# Running tests
+In the project root run
+```
+$ ./gradlew test
+```
